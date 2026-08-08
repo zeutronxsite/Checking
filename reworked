@@ -1,26 +1,47 @@
--- 1. Daftar PlaceId dan URL script khusus (Support)
+-- 1. Daftar PlaceId, Nama Game, dan URL script khusus (Support)
 local supportedScripts = {
-    -- Jailbreak
-    [606849621] = "https://raw.githubusercontent.com/zeutronxsite/Jailbreakz/refs/heads/main/Working",
-    
-    -- TLK Prison
-    [6933626061] = "https://raw.githubusercontent.com/IOERHUB/CheckingV2/refs/heads/main/Protection",
-    
-    -- Power Incremental
-    [96668710663666] = "https://raw.githubusercontent.com/IOERHUB/Power-Incremental/refs/heads/main/Working"
+    [606849621] = { 
+        Name = "Jailbreak", 
+        Url = "https://raw.githubusercontent.com/zeutronxsite/Jailbreakz/refs/heads/main/Working" 
+    },
+    [6933626061] = { 
+        Name = "TLK Prison", 
+        Url = "https://raw.githubusercontent.com/IOERHUB/CheckingV2/refs/heads/main/Protection" 
+    },
+    [96668710663666] = { 
+        Name = "Power Incremental", 
+        Url = "https://raw.githubusercontent.com/IOERHUB/Power-Incremental/refs/heads/main/Working" 
+    }
 }
 
 -- 2. URL Script Universal (Fallback jika game tidak didukung)
 local universalScript = "https://raw.githubusercontent.com/Zyptrue/Release/refs/heads/main/New%20Interface"
 
--- 3. Pengecekan PlaceId
+-- 3. Pengecekan PlaceId saat ini
 local currentPlaceId = game.PlaceId
+local scriptData = supportedScripts[currentPlaceId]
 
--- Jika PlaceId ada di dalam 'supportedScripts', gunakan URL tersebut. 
--- Jika tidak (nil), gunakan 'universalScript'.
-local scriptToLoad = supportedScripts[currentPlaceId] or universalScript
-
--- 4. Eksekusi script
-pcall(function()
-    loadstring(game:HttpGet(scriptToLoad))()
-end)
+-- 4. Eksekusi dengan Notifikasi (Print & Warn)
+if scriptData then
+    -- Jika game DIDUKUNG (Supported)
+    print(string.format("[SUPPORTED] Load Scripts For Game: %s", scriptData.Name))
+    
+    local success, err = pcall(function()
+        loadstring(game:HttpGet(scriptData.Url))()
+    end)
+    
+    if not success then
+        warn(string.format("[ERROR] failed to load scripts %s! Detail: %s", scriptData.Name, err))
+    end
+else
+    -- Jika game TIDAK DIDUKUNG (Universal Fallback)
+    warn("[UNIVERSAL] This game is not support (PlaceId: " .. currentPlaceId .. "). Load script Universal...")
+    
+    local success, err = pcall(function()
+        loadstring(game:HttpGet(universalScript))()
+    end)
+    
+    if not success then
+        warn(string.format("[ERROR] Failed to load Universal scripts Detail: %s", err))
+    end
+end
