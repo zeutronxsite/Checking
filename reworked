@@ -1,0 +1,26 @@
+-- 1. Daftar PlaceId dan URL script khusus (Support)
+local supportedScripts = {
+    -- Jailbreak
+    [606849621] = "https://raw.githubusercontent.com/zeutronxsite/Jailbreakz/refs/heads/main/Working",
+    
+    -- TLK Prison
+    [6933626061] = "https://raw.githubusercontent.com/IOERHUB/CheckingV2/refs/heads/main/Protection",
+    
+    -- Power Incremental
+    [96668710663666] = "https://raw.githubusercontent.com/IOERHUB/Power-Incremental/refs/heads/main/Working"
+}
+
+-- 2. URL Script Universal (Fallback jika game tidak didukung)
+local universalScript = "https://raw.githubusercontent.com/Zyptrue/Release/refs/heads/main/New%20Interface"
+
+-- 3. Pengecekan PlaceId
+local currentPlaceId = game.PlaceId
+
+-- Jika PlaceId ada di dalam 'supportedScripts', gunakan URL tersebut. 
+-- Jika tidak (nil), gunakan 'universalScript'.
+local scriptToLoad = supportedScripts[currentPlaceId] or universalScript
+
+-- 4. Eksekusi script
+pcall(function()
+    loadstring(game:HttpGet(scriptToLoad))()
+end)
