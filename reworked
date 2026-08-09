@@ -8,6 +8,12 @@ local supportedScripts = {
         Name = "TLK Prison", 
         Url = "https://raw.githubusercontent.com/IOERHUB/CheckingV2/refs/heads/main/Protection" 
     },
+
+    [13811085661] = { 
+        Name = "Area 51 Remake", 
+        Url = "https://raw.githubusercontent.com/zeutronxsite/Area-51-Remake/refs/heads/main/Latest%20Version" 
+    },
+
     [96668710663666] = { 
         Name = "Power Incremental", 
         Url = "https://raw.githubusercontent.com/IOERHUB/Power-Incremental/refs/heads/main/Working" 
