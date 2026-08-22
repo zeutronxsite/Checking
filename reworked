@@ -2,7 +2,8 @@
 local supportedScripts = {
     [606849621] = { 
         Name = "Jailbreak", 
-        Url = "https://raw.githubusercontent.com/zeutronxsite/Jailbreakz/refs/heads/main/Working" 
+        Url = "https://raw.githubusercontent.com/zeutronxsite/Jailbreakz/refs/heads/main/Working",
+               "https://raw.githubusercontent.com/Zyptrue/Release/refs/heads/main/New%20Interface"
     },
     [6933626061] = { 
         Name = "TLK Prison", 
